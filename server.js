@@ -35,8 +35,11 @@ app.use('/classes', require('./routes/classes'));
 // ---------- Static Frontend ----------
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+ const path = require('path');
+const FRONTEND_DIR = path.resolve(__dirname, '../frontend');
+app.use(express.static(FRONTEND_DIR));
+app.get('*', (_req, res) => { res.sendFile(path.join(FRONTEND_DIR, 'index.html')); });
+
 
 // Root logout endpoint for frontend compatibility
 app.post('/logout', (req, res) => {

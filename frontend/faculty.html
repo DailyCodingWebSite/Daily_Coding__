@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Dashboard - Daily Coding Challenge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body onload="protectPage('faculty')">
+
+  <!-- Global Header -->
+  <header role="banner">
+    <div class="header-left">
+      <img src="logo.png" alt="Christ University Logo" />
+    </div>
+    <div class="header-center">
+      <h1>Christ (deemed to be university) Kengeri Campus</h1>
+      <button onclick="doLogout()" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Faculty Dashboard -->
+    <header>
+      <h1>Faculty Dashboard</h1>
+      <div class="user-info">
+        <span id="facultyName">Welcome, Faculty!</span>
+      </div>
+    </header>
+
+    <!-- Filters -->
+    <div class="filters">
+      <h3>Filter Options</h3>
+
+      <div class="filter-group">
+        <label for="classFilter">Class:</label>
+        <select id="classFilter" onchange="filterData()">
+          <option value="">All Classes</option>
+          <option value="CSE-A">CSE-A</option>
+          <option value="CSE-B">CSE-B</option>
+          <option value="IT-A">IT-A</option>
+          <option value="IT-B">IT-B</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="weekPicker">Week:</label>
+        <input id="weekPicker" type="week" onchange="filterData()" />
+      </div>
+    </div>
+
+    <!-- Stats Summary -->
+    <div class="stats-summary">
+      <div class="stat-card">
+        <h4>Total Students</h4>
+        <span id="totalStudents">0</span>
+      </div>
+      <div class="stat-card">
+        <h4>Completed Today</h4>
+        <span id="completedToday">0</span>
+      </div>
+      <div class="stat-card">
+        <h4>Missed Today</h4>
+        <span id="missedToday">0</span>
+      </div>
+      <div class="stat-card">
+        <h4>Average Score</h4>
+        <span id="averageScore">0%</span>
+      </div>
+    </div>
+
+    <!-- Weekly Attendance Section -->
+    <div class="table-container">
+      <h3>Weekly Attendance</h3>
+      <div style="overflow:auto;">
+        <table id="performanceTable">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Class</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Marks</th>
+            </tr>
+          </thead>
+          <tbody id="performanceTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Student Status will be dynamically added by JavaScript -->
+  </div>
+
+  <!-- Load scripts in proper order -->
+  <script src="database.js"></script>
+  <script src="auth.js"></script>
+  <script src="faculty.js"></script>
+</body>
+</html>

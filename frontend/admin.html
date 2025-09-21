@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Daily Coding Challenge</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* --- Users List & Questions List Fix --- */
+    .list-container {
+      margin-top: 15px;
+    }
+
+    .list-container div {
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-container div button {
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .list-container div button:hover {
+      background-color: #d9363e;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    button[type="submit"] {
+      padding: 8px 15px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body onload="protectPage('admin')">
+
+  <!-- Global Header -->
+  <header role="banner">
+    <div class="header-left">
+      <img src="logo.png" alt="Christ University Logo" />
+    </div>
+    <div class="header-center">
+      <h1>Christ (Deemed to be University) Kengeri Campus</h1>
+      <button onclick="logout()" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+      <h1>Admin Dashboard</h1><br>
+      <div class="user-info">
+        <span id="adminName">Welcome, Admin!</span>
+      </div>
+    </header>
+    
+    <div class="admin-content">
+      <div class="tabs">
+        <button class="tab-button active" onclick="showTab('questions')">Manage Questions</button>
+        <button class="tab-button" onclick="showTab('schedule')">Schedule Quiz</button>
+        <button class="tab-button" onclick="showTab('users')">Manage Users</button>
+      </div>
+      
+      <!-- Questions Management Tab -->
+      <div id="questionsTab" class="tab-content active">
+        <h3>Add New Question</h3>
+        <form id="questionForm">
+          <div class="form-group">
+            <label for="questionText">Question:</label>
+            <textarea id="questionText" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="optionA">Option A:</label>
+            <input type="text" id="optionA" required>
+          </div>
+          <div class="form-group">
+            <label for="optionB">Option B:</label>
+            <input type="text" id="optionB" required>
+          </div>
+          <div class="form-group">
+            <label for="optionC">Option C:</label>
+            <input type="text" id="optionC" required>
+          </div>
+          <div class="form-group">
+            <label for="optionD">Option D:</label>
+            <input type="text" id="optionD" required>
+          </div>
+          <div class="form-group">
+            <label for="correctAnswer">Correct Answer:</label>
+            <select id="correctAnswer" required>
+              <option value="">Select Correct Answer</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <button type="submit">Add Question</button>
+        </form>
+        
+        <div class="questions-list">
+          <h3>Existing Questions</h3>
+          <div id="questionsList" class="list-container"></div>
+        </div>
+      </div>
+      
+      <!-- Schedule Tab -->
+      <div id="scheduleTab" class="tab-content">
+        <h3>Schedule Daily Quiz</h3>
+        <form id="scheduleForm">
+          <div class="form-group">
+            <label for="quizDate">Quiz Date:</label>
+            <input type="date" id="quizDate" required>
+          </div>
+          <div class="form-group">
+            <label for="startTime">Start Time:</label>
+            <input type="time" id="startTime" required>
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time:</label>
+            <input type="time" id="endTime" required>
+          </div>
+          <div class="form-group">
+            <label for="scheduleClass">Class:</label>
+            <select id="scheduleClass" required>
+              <option value="">Select Class</option>
+              <option value="CSE-A">CSE-A</option>
+              <option value="CSE-B">CSE-B</option>
+              <option value="IT-A">IT-A</option>
+              <option value="IT-B">IT-B</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="question1">Question 1:</label>
+            <select id="question1" required></select>
+          </div>
+          <div class="form-group">
+            <label for="question2">Question 2:</label>
+            <select id="question2" required></select>
+          </div>
+          <button type="submit">Schedule Quiz</button>
+        </form>
+        
+        <div class="scheduled-quizzes">
+          <h3>Scheduled Quizzes</h3>
+          <div id="scheduledList" class="list-container"></div>
+        </div>
+      </div>
+      
+      <!-- Users Management Tab -->
+      <div id="usersTab" class="tab-content">
+        <h3>Add New User</h3>
+        <form id="userForm">
+          <div class="form-group">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" required>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+          </div>
+          <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="userRole">Role:</label>
+            <select id="userRole" required>
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="form-group" id="classGroup">
+            <label for="userClass">Class:</label>
+            <select id="userClass">
+              <option value="">Select Class</option>
+              <option value="CSE-A">CSE-A</option>
+              <option value="CSE-B">CSE-B</option>
+              <option value="IT-A">IT-A</option>
+              <option value="IT-B">IT-B</option>
+            </select>
+          </div>
+          <button type="submit">Add User</button>
+        </form>
+        
+        <div class="users-list">
+          <h3>Existing Users</h3>
+         <div id="usersList" class="list-container"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Inline demo logic removed. This page now relies on backend via admin.js
+  // Ensure you log in as Admin first so admin.js can call secured endpoints.
+</script>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Daily Coding Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="protectPage('student')">
+
+     <header role="banner">
+    <div class="header-left">
+      <img src="logo.png" alt="Christ University Logo" />
+      </div>
+    <div class="header-center">
+      <h1>Christ(deemed to be university) Kengeri Campus</h1>
+      <button onclick="doLogout()" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+
+    </div>
+  </header>
+    <div class="container">
+        <header>
+            <h1>Student Dashboard</h1>
+            <div class="user-info">
+                <span id="studentName">Welcome, Student!</span>
+            </div>
+        </header>
+        
+        <div class="quiz-container">
+            <div id="quizAvailable" class="quiz-section">
+                <h2>Today's Coding Challenge</h2>
+                <div id="quizTimer" class="timer"></div>
+                
+                <div id="quizContent">
+                    <div class="question" id="question1">
+                        <h3>Question 1:</h3>
+                        <p id="q1Text"></p>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="A"> <span id="q1optA"></span></label>
+                            <label><input type="radio" name="q1" value="B"> <span id="q1optB"></span></label>
+                            <label><input type="radio" name="q1" value="C"> <span id="q1optC"></span></label>
+                            <label><input type="radio" name="q1" value="D"> <span id="q1optD"></span></label>
+                        </div>
+                    </div>
+                    
+                    <div class="question" id="question2">
+                        <h3>Question 2:</h3>
+                        <p id="q2Text"></p>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="A"> <span id="q2optA"></span></label>
+                            <label><input type="radio" name="q2" value="B"> <span id="q2optB"></span></label>
+                            <label><input type="radio" name="q2" value="C"> <span id="q2optC"></span></label>
+                            <label><input type="radio" name="q2" value="D"> <span id="q2optD"></span></label>
+                        </div>
+                    </div>
+                    
+                    <button id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+                </div>
+            </div>
+            
+            <div id="quizCompleted" class="quiz-section" style="display: none;">
+                <h2>Quiz Completed!</h2>
+                <p>You have already completed today's quiz.</p>
+                <div id="quizResults"></div>
+            </div>
+            
+            <div id="quizUnavailable" class="quiz-section" style="display: none;">
+                <h2>No Quiz Available</h2>
+                <p>Today's quiz is not yet available or has expired.</p>
+                <p>Check back later!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load scripts in proper order -->
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="student.js"></script>
+</body>
+</html>

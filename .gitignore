@@ -1,0 +1,36 @@
+# Node & package managers
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# Builds & caches
+.DS_Store
+Thumbs.db
+*.log
+coverage/
+dist/
+build/
+.cache/
+.tmp/
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Desktop.ini
+$RECYCLE.BIN/
